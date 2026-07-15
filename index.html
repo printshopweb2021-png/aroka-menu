@@ -23,9 +23,9 @@
       line-height:1.35;
     }
     .hero{
-      min-height:54vh;
+      min-height:62vh;
       background:
-        linear-gradient(rgba(23,61,49,.05),rgba(23,61,49,.05)),
+        linear-gradient(rgba(23,61,49,.10),rgba(23,61,49,.10)),
         url("aroka-logo.jpg") center/cover no-repeat;
       display:flex;
       align-items:flex-end;
@@ -144,21 +144,32 @@
 <body>
 
 <header class="hero">
-  <div class="hero-note">Повлечете надолу за менито</div>
+  <div class="hero-note">AROKA MENU · Повлечете надолу</div>
 </header>
 
 <div class="nav-wrap">
   <nav aria-label="Категории">
-    <a href="#coffee">Кафе</a>
     <a href="#bites">Bites</a>
+    <a href="#coffee">Кафе</a>
     <a href="#water">Вода</a>
+    <a href="#soft">Безалкохолни</a>
     <a href="#beer">Пиво</a>
     <a href="#alcohol">Алкохол</a>
-    <a href="#soft">Безалкохолни</a>
   </nav>
 </div>
 
 <main>
+
+  <section class="section" id="bites">
+    <h2>Bites</h2>
+    <div class="menu-item"><div class="name">Пршут сендвич / тост<span class="desc">интегрално/бело лепче, сос, кашкавал, пршута</span></div><div class="price">170 ден.</div></div>
+    <div class="menu-item"><div class="name">Кулен сендвич / тост<span class="desc">интегрално/бело лепче, сос, кашкавал, кулен</span></div><div class="price">160 ден.</div></div>
+    <div class="menu-item"><div class="name">Ладна даска<span class="desc">пршута, кашкавал, кулен, пармезан, апетисани</span></div><div class="price">320 ден.</div></div>
+    <div class="menu-item"><div class="name">Апетисани<span class="desc">микс од бадеми, индиски ореви, лешници</span></div><div class="price">120 ден.</div></div>
+    <div class="menu-item"><div class="name">Кикирики</div><div class="price">60 ден.</div></div>
+    <div class="menu-item"><div class="name">Портокалови кикирики</div><div class="price">80 ден.</div></div>
+    <div class="menu-item"><div class="name">Нутела чизкејк</div><div class="price">80 ден.</div></div>
+  </section>
   <section class="section" id="coffee">
     <h2>Кафе</h2>
     <div class="menu-item"><div class="name">Еспресо</div><div class="price">70 ден.</div></div>
@@ -179,23 +190,29 @@
     <div class="menu-item"><div class="name">Топло чоколадо</div><div class="price">120 ден.</div></div>
   </section>
 
-  <section class="section" id="bites">
-    <h2>Bites</h2>
-    <div class="menu-item"><div class="name">Пршут сендвич / тост<span class="desc">интегрално/бело лепче, сос, кашкавал, пршута</span></div><div class="price">170 ден.</div></div>
-    <div class="menu-item"><div class="name">Кулен сендвич / тост<span class="desc">интегрално/бело лепче, сос, кашкавал, кулен</span></div><div class="price">160 ден.</div></div>
-    <div class="menu-item"><div class="name">Ладна даска<span class="desc">пршута, кашкавал, кулен, пармезан, апетисани</span></div><div class="price">320 ден.</div></div>
-    <div class="menu-item"><div class="name">Апетисани<span class="desc">микс од бадеми, индиски ореви, лешници</span></div><div class="price">120 ден.</div></div>
-    <div class="menu-item"><div class="name">Кикирики</div><div class="price">60 ден.</div></div>
-    <div class="menu-item"><div class="name">Портокалови кикирики</div><div class="price">80 ден.</div></div>
-    <div class="menu-item"><div class="name">Нутела чизкејк</div><div class="price">80 ден.</div></div>
-  </section>
-
   <section class="section" id="water">
     <h2>Вода</h2>
     <div class="menu-item"><div class="name">Флаширана вода</div><div class="price">60 ден.</div></div>
     <div class="menu-item"><div class="name">Газирана вода</div><div class="price">70 ден.</div></div>
     <div class="menu-item"><div class="name">Добра Вода Active</div><div class="price">70 ден.</div></div>
     <div class="menu-item"><div class="name">Добра Вода Wellness</div><div class="price">70 ден.</div></div>
+  </section>
+
+  <section class="section" id="soft">
+    <h2>Безалкохолни пијалоци</h2>
+    <div class="menu-item"><div class="name">Кока-Кола</div><div class="price">80 ден.</div></div>
+    <div class="menu-item"><div class="name">Кока-Кола Zero</div><div class="price">80 ден.</div></div>
+    <div class="menu-item"><div class="name">Фанта</div><div class="price">80 ден.</div></div>
+    <div class="menu-item"><div class="name">Спрајт</div><div class="price">80 ден.</div></div>
+    <div class="menu-item"><div class="name">Швепс</div><div class="price">80 ден.</div></div>
+    <div class="menu-item"><div class="name">Тоник</div><div class="price">80 ден.</div></div>
+    <div class="menu-item"><div class="name">Soda<span class="desc">Mojito, Lemon, Orange</span></div><div class="price">90 ден.</div></div>
+    <div class="menu-item"><div class="name">Aloe Vera<span class="desc">јагода, манго, грозје</span></div><div class="price">90 ден.</div></div>
+    <div class="menu-item"><div class="name">Густи сок</div><div class="price">90 ден.</div></div>
+    <div class="menu-item"><div class="name">Леден чај</div><div class="price">100 ден.</div></div>
+    <div class="menu-item"><div class="name">Цедевита</div><div class="price">70 ден.</div></div>
+    <div class="menu-item"><div class="name">Фреш</div><div class="price">150 ден.</div></div>
+    <div class="menu-item"><div class="name">Цеден сок</div><div class="price">170 ден.</div></div>
   </section>
 
   <section class="section" id="beer">
@@ -237,25 +254,7 @@
     <div class="menu-item"><div class="name">Амарето</div><div class="price">120 ден.</div></div>
     <div class="menu-item"><div class="name">Шток</div><div class="price">120 ден.</div></div>
     <div class="menu-item"><div class="name">Хуго</div><div class="price">160 ден.</div></div>
-  </section>
-
-  <section class="section" id="soft">
-    <h2>Безалкохолни пијалоци</h2>
-    <div class="menu-item"><div class="name">Кока-Кола</div><div class="price">80 ден.</div></div>
-    <div class="menu-item"><div class="name">Кока-Кола Zero</div><div class="price">80 ден.</div></div>
-    <div class="menu-item"><div class="name">Фанта</div><div class="price">80 ден.</div></div>
-    <div class="menu-item"><div class="name">Спрајт</div><div class="price">80 ден.</div></div>
-    <div class="menu-item"><div class="name">Швепс</div><div class="price">80 ден.</div></div>
-    <div class="menu-item"><div class="name">Тоник</div><div class="price">80 ден.</div></div>
-    <div class="menu-item"><div class="name">Soda<span class="desc">Mojito, Lemon, Orange</span></div><div class="price">90 ден.</div></div>
-    <div class="menu-item"><div class="name">Aloe Vera<span class="desc">јагода, манго, грозје</span></div><div class="price">90 ден.</div></div>
-    <div class="menu-item"><div class="name">Густи сок</div><div class="price">90 ден.</div></div>
-    <div class="menu-item"><div class="name">Леден чај</div><div class="price">100 ден.</div></div>
-    <div class="menu-item"><div class="name">Цедевита</div><div class="price">70 ден.</div></div>
-    <div class="menu-item"><div class="name">Фреш</div><div class="price">150 ден.</div></div>
-    <div class="menu-item"><div class="name">Цеден сок</div><div class="price">170 ден.</div></div>
-  </section>
-</main>
+  </section></main>
 
 <footer>AROKA CAFÉ</footer>
 </body>
