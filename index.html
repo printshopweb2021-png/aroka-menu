@@ -5,53 +5,95 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#173d31">
   <title>AROKA Café Menu</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root{
-      --cream:#f6ecd8;
+      --cream:#f4ead7;
       --green:#173d31;
-      --sage:#9cad98;
-      --line:rgba(23,61,49,.20);
-      --card:rgba(255,255,255,.30);
+      --line:rgba(23,61,49,.16);
+      --card:rgba(255,255,255,.36);
     }
+
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
+
     body{
       margin:0;
       color:var(--green);
       background:var(--cream);
-      font-family:Arial, Helvetica, sans-serif;
-      line-height:1.35;
+      font-family:"Montserrat", Arial, sans-serif;
+      line-height:1.4;
+      overflow-x:hidden;
     }
+
+    .floating-pattern{
+      position:fixed;
+      z-index:-1;
+      width:330px;
+      height:330px;
+      background:url("pattern.png") center/contain no-repeat;
+      opacity:.11;
+      pointer-events:none;
+      will-change:transform;
+    }
+
+    .pattern-1{left:-125px;top:-70px}
+    .pattern-2{right:-135px;top:38vh;transform:rotate(180deg)}
+    .pattern-3{left:-145px;bottom:-120px;transform:rotate(90deg)}
+
     .hero{
-      min-height:62vh;
-      background:
-        linear-gradient(rgba(23,61,49,.10),rgba(23,61,49,.10)),
-        url("aroka-logo.jpg") center/cover no-repeat;
+      min-height:72vh;
       display:flex;
-      align-items:flex-end;
+      align-items:center;
       justify-content:center;
-      padding:24px;
+      text-align:center;
+      padding:48px 24px 36px;
     }
-    .hero-note{
-      color:#ead2af;
-      font-size:12px;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      background:rgba(23,61,49,.62);
-      border:1px solid rgba(234,210,175,.35);
-      padding:10px 14px;
+
+    .hero-inner{position:relative;z-index:1}
+
+    .logo{
+      width:min(76vw,430px);
+      height:auto;
+      display:block;
+      margin:0 auto;
+    }
+
+    .menu-label{
+      margin-top:20px;
+      font-size:13px;
+      font-weight:600;
+      letter-spacing:.34em;
+    }
+
+    .open-menu{
+      display:inline-block;
+      margin-top:30px;
+      padding:12px 18px;
+      border:1px solid var(--green);
       border-radius:999px;
-      backdrop-filter:blur(6px);
+      color:var(--green);
+      text-decoration:none;
+      font-size:13px;
+      font-weight:500;
+      background:rgba(255,255,255,.22);
     }
+
     .nav-wrap{
       position:sticky;
       top:0;
-      z-index:10;
-      background:rgba(246,236,216,.94);
-      backdrop-filter:blur(12px);
-      border-bottom:1px solid var(--line);
+      z-index:20;
       padding:10px 12px;
+      background:rgba(244,234,215,.94);
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+      backdrop-filter:blur(12px);
     }
+
     nav{
       max-width:820px;
       margin:auto;
@@ -59,203 +101,275 @@
       gap:8px;
       overflow-x:auto;
       scrollbar-width:none;
+      scroll-behavior:smooth;
     }
+
     nav::-webkit-scrollbar{display:none}
+
     nav a{
       flex:0 0 auto;
       text-decoration:none;
       color:var(--green);
-      border:1px solid var(--green);
-      padding:9px 14px;
+      border:1px solid rgba(23,61,49,.34);
       border-radius:999px;
+      padding:9px 14px;
       font-size:13px;
-      background:rgba(255,255,255,.22);
+      font-weight:500;
+      background:rgba(255,255,255,.20);
+      transition:.2s ease;
     }
-    nav a:first-child{
+
+    nav a.active{
       color:var(--cream);
       background:var(--green);
+      border-color:var(--green);
     }
+
     main{
-      width:min(100% - 28px, 820px);
+      width:min(100% - 28px,820px);
       margin:auto;
-      padding:30px 0 72px;
+      padding:30px 0 76px;
     }
+
     .section{
       position:relative;
       overflow:hidden;
+      scroll-margin-top:82px;
       margin:0 0 26px;
-      padding:28px 22px 22px;
+      padding:30px 22px 24px;
       background:var(--card);
       border:1px solid var(--line);
-      border-radius:22px;
-      box-shadow:0 12px 32px rgba(23,61,49,.05);
-      scroll-margin-top:76px;
+      border-radius:20px;
+      box-shadow:0 12px 34px rgba(23,61,49,.055);
     }
-    .section::after{
-      content:"";
-      position:absolute;
-      right:-55px;
-      bottom:-55px;
-      width:190px;
-      height:190px;
-      background:url("aroka-pattern.png") center/contain no-repeat;
-      opacity:.12;
-      pointer-events:none;
-    }
-    .section:nth-child(even)::after{
-      right:auto;
-      left:-55px;
-      top:-55px;
-      bottom:auto;
-    }
+
     h2{
-      margin:0 0 18px;
-      font-size:27px;
-      letter-spacing:.02em;
+      margin:0 0 20px;
+      font-size:29px;
+      font-weight:600;
+      letter-spacing:.01em;
     }
+
     .menu-item{
-      position:relative;
-      z-index:1;
       display:grid;
       grid-template-columns:minmax(0,1fr) auto;
       gap:16px;
       align-items:start;
-      padding:9px 0;
-      border-bottom:1px solid rgba(23,61,49,.09);
+      padding:11px 0;
+      border-bottom:1px solid rgba(23,61,49,.085);
     }
+
     .menu-item:last-child{border-bottom:0}
-    .name{font-size:17px;font-weight:500}
-    .desc{display:block;margin-top:3px;font-size:11px;opacity:.72;font-weight:400}
-    .price{white-space:nowrap;font-size:16px;font-weight:700}
+
+    .name{
+      font-size:16px;
+      font-weight:500;
+    }
+
+    .desc{
+      display:block;
+      margin-top:5px;
+      font-size:11px;
+      line-height:1.5;
+      opacity:.72;
+      font-weight:400;
+    }
+
+    .price{
+      white-space:nowrap;
+      font-size:15px;
+      font-weight:600;
+    }
+
     footer{
       text-align:center;
-      padding:12px 20px 46px;
-      font-size:13px;
-      letter-spacing:.12em;
-      opacity:.65;
+      padding:0 20px 46px;
+      font-size:12px;
+      font-weight:500;
+      letter-spacing:.16em;
+      opacity:.62;
     }
+
     @media (min-width:700px){
-      .hero{min-height:68vh}
-      .section{padding:34px 34px 28px}
-      .name{font-size:18px}
+      .hero{min-height:78vh}
+      .section{padding:36px 34px 30px}
+      .name{font-size:17px}
+      .price{font-size:16px}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      .floating-pattern{transform:none !important}
     }
   </style>
 </head>
 <body>
 
-<header class="hero">
-  <div class="hero-note">AROKA MENU · Повлечете надолу</div>
-</header>
+  <div class="floating-pattern pattern-1" data-speed="0.12"></div>
+  <div class="floating-pattern pattern-2" data-speed="0.18"></div>
+  <div class="floating-pattern pattern-3" data-speed="0.08"></div>
 
-<div class="nav-wrap">
-  <nav aria-label="Категории">
-    <a href="#bites">Bites</a>
-    <a href="#coffee">Кафе</a>
-    <a href="#water">Вода</a>
-    <a href="#soft">Безалкохолни</a>
-    <a href="#beer">Пиво</a>
-    <a href="#alcohol">Алкохол</a>
-  </nav>
-</div>
+  <header class="hero">
+    <div class="hero-inner">
+      <img class="logo" src="logo.png" alt="AROKA Café">
+      <div class="menu-label">MENU</div>
+      <a class="open-menu" href="#bites">Отвори мени</a>
+    </div>
+  </header>
 
-<main>
+  <div class="nav-wrap">
+    <nav aria-label="Категории">
+      <a href="#bites" data-section="bites">Bites</a>
+      <a href="#coffee" data-section="coffee">Кафе</a>
+      <a href="#water" data-section="water">Вода</a>
+      <a href="#soft" data-section="soft">Безалкохолни</a>
+      <a href="#beer" data-section="beer">Пиво</a>
+      <a href="#alcohol" data-section="alcohol">Алкохол</a>
+    </nav>
+  </div>
 
-  <section class="section" id="bites">
-    <h2>Bites</h2>
-    <div class="menu-item"><div class="name">Пршут сендвич / тост<span class="desc">интегрално/бело лепче, сос, кашкавал, пршута</span></div><div class="price">170 ден.</div></div>
-    <div class="menu-item"><div class="name">Кулен сендвич / тост<span class="desc">интегрално/бело лепче, сос, кашкавал, кулен</span></div><div class="price">160 ден.</div></div>
-    <div class="menu-item"><div class="name">Ладна даска<span class="desc">пршута, кашкавал, кулен, пармезан, апетисани</span></div><div class="price">320 ден.</div></div>
-    <div class="menu-item"><div class="name">Апетисани<span class="desc">микс од бадеми, индиски ореви, лешници</span></div><div class="price">120 ден.</div></div>
-    <div class="menu-item"><div class="name">Кикирики</div><div class="price">60 ден.</div></div>
-    <div class="menu-item"><div class="name">Портокалови кикирики</div><div class="price">80 ден.</div></div>
-    <div class="menu-item"><div class="name">Нутела чизкејк</div><div class="price">80 ден.</div></div>
-  </section>
-  <section class="section" id="coffee">
-    <h2>Кафе</h2>
-    <div class="menu-item"><div class="name">Еспресо</div><div class="price">70 ден.</div></div>
-    <div class="menu-item"><div class="name">Еспресо дупло</div><div class="price">90 ден.</div></div>
-    <div class="menu-item"><div class="name">Макијато мало</div><div class="price">80 ден.</div></div>
-    <div class="menu-item"><div class="name">Макијато големо</div><div class="price">90 ден.</div></div>
-    <div class="menu-item"><div class="name">Фредо макијато</div><div class="price">130 ден.</div></div>
-    <div class="menu-item"><div class="name">Лате макијато</div><div class="price">100 ден.</div></div>
-    <div class="menu-item"><div class="name">Фредо еспресо</div><div class="price">120 ден.</div></div>
-    <div class="menu-item"><div class="name">Еспресо тоник</div><div class="price">100 ден.</div></div>
-    <div class="menu-item"><div class="name">Нескафе</div><div class="price">100 ден.</div></div>
-    <div class="menu-item"><div class="name">Американо</div><div class="price">70 ден.</div></div>
-    <div class="menu-item"><div class="name">Капучино ирско</div><div class="price">100 ден.</div></div>
-    <div class="menu-item"><div class="name">Капучино лешник</div><div class="price">100 ден.</div></div>
-    <div class="menu-item"><div class="name">Капучино ванила</div><div class="price">100 ден.</div></div>
-    <div class="menu-item"><div class="name">Какао</div><div class="price">90 ден.</div></div>
-    <div class="menu-item"><div class="name">Турско кафе</div><div class="price">80 ден.</div></div>
-    <div class="menu-item"><div class="name">Топло чоколадо</div><div class="price">120 ден.</div></div>
-  </section>
+  <main>
+    <section class="section" id="bites">
+      <h2>Bites</h2>
+      <div class="menu-item"><div class="name">Пршут сендвич / тост<span class="desc">интегрално/бело лепче, сос, кашкавал, пршута</span></div><div class="price">170 ден.</div></div>
+      <div class="menu-item"><div class="name">Кулен сендвич / тост<span class="desc">интегрално/бело лепче, сос, кашкавал, кулен</span></div><div class="price">160 ден.</div></div>
+      <div class="menu-item"><div class="name">Ладна даска<span class="desc">пршута, кашкавал, кулен, пармезан, апетисани</span></div><div class="price">320 ден.</div></div>
+      <div class="menu-item"><div class="name">Апетисани<span class="desc">микс од бадеми, индиски ореви, лешници</span></div><div class="price">120 ден.</div></div>
+      <div class="menu-item"><div class="name">Кикирики</div><div class="price">60 ден.</div></div>
+      <div class="menu-item"><div class="name">Портокалови кикирики</div><div class="price">80 ден.</div></div>
+      <div class="menu-item"><div class="name">Нутела чизкејк</div><div class="price">80 ден.</div></div>
+    </section>
 
-  <section class="section" id="water">
-    <h2>Вода</h2>
-    <div class="menu-item"><div class="name">Флаширана вода</div><div class="price">60 ден.</div></div>
-    <div class="menu-item"><div class="name">Газирана вода</div><div class="price">70 ден.</div></div>
-    <div class="menu-item"><div class="name">Добра Вода Active</div><div class="price">70 ден.</div></div>
-    <div class="menu-item"><div class="name">Добра Вода Wellness</div><div class="price">70 ден.</div></div>
-  </section>
+    <section class="section" id="coffee">
+      <h2>Кафе</h2>
+      <div class="menu-item"><div class="name">Еспресо</div><div class="price">70 ден.</div></div>
+      <div class="menu-item"><div class="name">Еспресо дупло</div><div class="price">90 ден.</div></div>
+      <div class="menu-item"><div class="name">Макијато мало</div><div class="price">80 ден.</div></div>
+      <div class="menu-item"><div class="name">Макијато големо</div><div class="price">90 ден.</div></div>
+      <div class="menu-item"><div class="name">Фредо макијато</div><div class="price">130 ден.</div></div>
+      <div class="menu-item"><div class="name">Лате макијато</div><div class="price">100 ден.</div></div>
+      <div class="menu-item"><div class="name">Фредо еспресо</div><div class="price">120 ден.</div></div>
+      <div class="menu-item"><div class="name">Еспресо тоник</div><div class="price">100 ден.</div></div>
+      <div class="menu-item"><div class="name">Нескафе</div><div class="price">100 ден.</div></div>
+      <div class="menu-item"><div class="name">Американо</div><div class="price">70 ден.</div></div>
+      <div class="menu-item"><div class="name">Капучино ирско</div><div class="price">100 ден.</div></div>
+      <div class="menu-item"><div class="name">Капучино лешник</div><div class="price">100 ден.</div></div>
+      <div class="menu-item"><div class="name">Капучино ванила</div><div class="price">100 ден.</div></div>
+      <div class="menu-item"><div class="name">Какао</div><div class="price">90 ден.</div></div>
+      <div class="menu-item"><div class="name">Турско кафе</div><div class="price">80 ден.</div></div>
+      <div class="menu-item"><div class="name">Топло чоколадо</div><div class="price">120 ден.</div></div>
+    </section>
 
-  <section class="section" id="soft">
-    <h2>Безалкохолни пијалоци</h2>
-    <div class="menu-item"><div class="name">Кока-Кола</div><div class="price">80 ден.</div></div>
-    <div class="menu-item"><div class="name">Кока-Кола Zero</div><div class="price">80 ден.</div></div>
-    <div class="menu-item"><div class="name">Фанта</div><div class="price">80 ден.</div></div>
-    <div class="menu-item"><div class="name">Спрајт</div><div class="price">80 ден.</div></div>
-    <div class="menu-item"><div class="name">Швепс</div><div class="price">80 ден.</div></div>
-    <div class="menu-item"><div class="name">Тоник</div><div class="price">80 ден.</div></div>
-    <div class="menu-item"><div class="name">Soda<span class="desc">Mojito, Lemon, Orange</span></div><div class="price">90 ден.</div></div>
-    <div class="menu-item"><div class="name">Aloe Vera<span class="desc">јагода, манго, грозје</span></div><div class="price">90 ден.</div></div>
-    <div class="menu-item"><div class="name">Густи сок</div><div class="price">90 ден.</div></div>
-    <div class="menu-item"><div class="name">Леден чај</div><div class="price">100 ден.</div></div>
-    <div class="menu-item"><div class="name">Цедевита</div><div class="price">70 ден.</div></div>
-    <div class="menu-item"><div class="name">Фреш</div><div class="price">150 ден.</div></div>
-    <div class="menu-item"><div class="name">Цеден сок</div><div class="price">170 ден.</div></div>
-  </section>
+    <section class="section" id="water">
+      <h2>Вода</h2>
+      <div class="menu-item"><div class="name">Флаширана вода</div><div class="price">60 ден.</div></div>
+      <div class="menu-item"><div class="name">Газирана вода</div><div class="price">70 ден.</div></div>
+      <div class="menu-item"><div class="name">Добра Вода Active</div><div class="price">70 ден.</div></div>
+      <div class="menu-item"><div class="name">Добра Вода Wellness</div><div class="price">70 ден.</div></div>
+    </section>
 
-  <section class="section" id="beer">
-    <h2>Пиво</h2>
-    <div class="menu-item"><div class="name">Amstel</div><div class="price">100 ден.</div></div>
-    <div class="menu-item"><div class="name">Birra Moretti</div><div class="price">120 ден.</div></div>
-    <div class="menu-item"><div class="name">Heineken</div><div class="price">120 ден.</div></div>
-    <div class="menu-item"><div class="name">Heineken 0.0%</div><div class="price">120 ден.</div></div>
-    <div class="menu-item"><div class="name">Skopsko</div><div class="price">110 ден.</div></div>
-    <div class="menu-item"><div class="name">Skopsko Smooth</div><div class="price">110 ден.</div></div>
-  </section>
+    <section class="section" id="soft">
+      <h2>Безалкохолни пијалоци</h2>
+      <div class="menu-item"><div class="name">Кока-Кола</div><div class="price">80 ден.</div></div>
+      <div class="menu-item"><div class="name">Кока-Кола Zero</div><div class="price">80 ден.</div></div>
+      <div class="menu-item"><div class="name">Фанта</div><div class="price">80 ден.</div></div>
+      <div class="menu-item"><div class="name">Спрајт</div><div class="price">80 ден.</div></div>
+      <div class="menu-item"><div class="name">Швепс</div><div class="price">80 ден.</div></div>
+      <div class="menu-item"><div class="name">Тоник</div><div class="price">80 ден.</div></div>
+      <div class="menu-item"><div class="name">Soda<span class="desc">Mojito, Lemon, Orange</span></div><div class="price">90 ден.</div></div>
+      <div class="menu-item"><div class="name">Aloe Vera<span class="desc">јагода, манго, грозје</span></div><div class="price">90 ден.</div></div>
+      <div class="menu-item"><div class="name">Густи сок</div><div class="price">90 ден.</div></div>
+      <div class="menu-item"><div class="name">Леден чај</div><div class="price">100 ден.</div></div>
+      <div class="menu-item"><div class="name">Цедевита</div><div class="price">70 ден.</div></div>
+      <div class="menu-item"><div class="name">Фреш</div><div class="price">150 ден.</div></div>
+      <div class="menu-item"><div class="name">Цеден сок</div><div class="price">170 ден.</div></div>
+    </section>
 
-  <section class="section" id="alcohol">
-    <h2>Алкохол</h2>
-    <div class="menu-item"><div class="name">Вотка</div><div class="price">120 ден.</div></div>
-    <div class="menu-item"><div class="name">Вотка Смирноф</div><div class="price">130 ден.</div></div>
-    <div class="menu-item"><div class="name">Вотка портокал</div><div class="price">160 ден.</div></div>
-    <div class="menu-item"><div class="name">Џин</div><div class="price">130 ден.</div></div>
-    <div class="menu-item"><div class="name">Џин Гордонс</div><div class="price">140 ден.</div></div>
-    <div class="menu-item"><div class="name">Џин Гордонс Пинк</div><div class="price">150 ден.</div></div>
-    <div class="menu-item"><div class="name">Џин Бомбај</div><div class="price">160 ден.</div></div>
-    <div class="menu-item"><div class="name">Џин тоник Гордонс</div><div class="price">180 ден.</div></div>
-    <div class="menu-item"><div class="name">Џин тоник Савој</div><div class="price">170 ден.</div></div>
-    <div class="menu-item"><div class="name">Виски Балентајнс</div><div class="price">180 ден.</div></div>
-    <div class="menu-item"><div class="name">Џејмсон</div><div class="price">160 ден.</div></div>
-    <div class="menu-item"><div class="name">Џек Даниелс</div><div class="price">180 ден.</div></div>
-    <div class="menu-item"><div class="name">Џони Вокер Ред</div><div class="price">150 ден.</div></div>
-    <div class="menu-item"><div class="name">Џони Вокер Блек</div><div class="price">150 ден.</div></div>
-    <div class="menu-item"><div class="name">Чивас</div><div class="price">160 ден.</div></div>
-    <div class="menu-item"><div class="name">Ракија</div><div class="price">100 ден.</div></div>
-    <div class="menu-item"><div class="name">Мастика</div><div class="price">120 ден.</div></div>
-    <div class="menu-item"><div class="name">Пелинковац</div><div class="price">140 ден.</div></div>
-    <div class="menu-item"><div class="name">Узо Пломари</div><div class="price">120 ден.</div></div>
-    <div class="menu-item"><div class="name">Рум Бакарди</div><div class="price">120 ден.</div></div>
-    <div class="menu-item"><div class="name">Коњак</div><div class="price">110 ден.</div></div>
-    <div class="menu-item"><div class="name">Аперол</div><div class="price">160 ден.</div></div>
-    <div class="menu-item"><div class="name">Кампари</div><div class="price">140 ден.</div></div>
-    <div class="menu-item"><div class="name">Јегер</div><div class="price">140 ден.</div></div>
-    <div class="menu-item"><div class="name">Амарето</div><div class="price">120 ден.</div></div>
-    <div class="menu-item"><div class="name">Шток</div><div class="price">120 ден.</div></div>
-    <div class="menu-item"><div class="name">Хуго</div><div class="price">160 ден.</div></div>
-  </section></main>
+    <section class="section" id="beer">
+      <h2>Пиво</h2>
+      <div class="menu-item"><div class="name">Amstel</div><div class="price">100 ден.</div></div>
+      <div class="menu-item"><div class="name">Birra Moretti</div><div class="price">120 ден.</div></div>
+      <div class="menu-item"><div class="name">Heineken</div><div class="price">120 ден.</div></div>
+      <div class="menu-item"><div class="name">Heineken 0.0%</div><div class="price">120 ден.</div></div>
+      <div class="menu-item"><div class="name">Skopsko</div><div class="price">110 ден.</div></div>
+      <div class="menu-item"><div class="name">Skopsko Smooth</div><div class="price">110 ден.</div></div>
+    </section>
 
-<footer>AROKA CAFÉ</footer>
+    <section class="section" id="alcohol">
+      <h2>Алкохол</h2>
+      <div class="menu-item"><div class="name">Вотка</div><div class="price">120 ден.</div></div>
+      <div class="menu-item"><div class="name">Вотка Смирноф</div><div class="price">130 ден.</div></div>
+      <div class="menu-item"><div class="name">Вотка портокал</div><div class="price">160 ден.</div></div>
+      <div class="menu-item"><div class="name">Џин</div><div class="price">130 ден.</div></div>
+      <div class="menu-item"><div class="name">Џин Гордонс</div><div class="price">140 ден.</div></div>
+      <div class="menu-item"><div class="name">Џин Гордонс Пинк</div><div class="price">150 ден.</div></div>
+      <div class="menu-item"><div class="name">Џин Бомбај</div><div class="price">160 ден.</div></div>
+      <div class="menu-item"><div class="name">Џин тоник Гордонс</div><div class="price">180 ден.</div></div>
+      <div class="menu-item"><div class="name">Џин тоник Савој</div><div class="price">170 ден.</div></div>
+      <div class="menu-item"><div class="name">Виски Балентајнс</div><div class="price">180 ден.</div></div>
+      <div class="menu-item"><div class="name">Џејмсон</div><div class="price">160 ден.</div></div>
+      <div class="menu-item"><div class="name">Џек Даниелс</div><div class="price">180 ден.</div></div>
+      <div class="menu-item"><div class="name">Џони Вокер Ред</div><div class="price">150 ден.</div></div>
+      <div class="menu-item"><div class="name">Џони Вокер Блек</div><div class="price">150 ден.</div></div>
+      <div class="menu-item"><div class="name">Чивас</div><div class="price">160 ден.</div></div>
+      <div class="menu-item"><div class="name">Ракија</div><div class="price">100 ден.</div></div>
+      <div class="menu-item"><div class="name">Мастика</div><div class="price">120 ден.</div></div>
+      <div class="menu-item"><div class="name">Пелинковац</div><div class="price">140 ден.</div></div>
+      <div class="menu-item"><div class="name">Узо Пломари</div><div class="price">120 ден.</div></div>
+      <div class="menu-item"><div class="name">Рум Бакарди</div><div class="price">120 ден.</div></div>
+      <div class="menu-item"><div class="name">Коњак</div><div class="price">110 ден.</div></div>
+      <div class="menu-item"><div class="name">Аперол</div><div class="price">160 ден.</div></div>
+      <div class="menu-item"><div class="name">Кампари</div><div class="price">140 ден.</div></div>
+      <div class="menu-item"><div class="name">Јегер</div><div class="price">140 ден.</div></div>
+      <div class="menu-item"><div class="name">Амарето</div><div class="price">120 ден.</div></div>
+      <div class="menu-item"><div class="name">Шток</div><div class="price">120 ден.</div></div>
+      <div class="menu-item"><div class="name">Хуго</div><div class="price">160 ден.</div></div>
+    </section>
+  </main>
+
+  <footer>AROKA CAFÉ</footer>
+
+  <script>
+    const links=[...document.querySelectorAll('nav a')];
+    const sections=[...document.querySelectorAll('main section')];
+    const patterns=[...document.querySelectorAll('.floating-pattern')];
+
+    function setActive(id){
+      links.forEach(link=>{
+        const active=link.dataset.section===id;
+        link.classList.toggle('active',active);
+        if(active) link.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});
+      });
+    }
+
+    const observer=new IntersectionObserver(entries=>{
+      const visible=entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio);
+      if(visible.length) setActive(visible[0].target.id);
+    },{rootMargin:'-22% 0px -62% 0px',threshold:[0.05,0.15,0.3,0.5]});
+
+    sections.forEach(s=>observer.observe(s));
+    links.forEach(l=>l.addEventListener('click',()=>setActive(l.dataset.section)));
+
+    let ticking=false;
+    function updateParallax(){
+      const y=window.scrollY;
+      patterns.forEach((p,i)=>{
+        const speed=parseFloat(p.dataset.speed||0.1);
+        const rotate=i===1?180:(i===2?90:0);
+        p.style.transform=`translate3d(0, ${y*speed}px, 0) rotate(${rotate}deg)`;
+      });
+      ticking=false;
+    }
+
+    window.addEventListener('scroll',()=>{
+      if(!ticking){
+        requestAnimationFrame(updateParallax);
+        ticking=true;
+      }
+    },{passive:true});
+
+    setActive('bites');
+    updateParallax();
+  </script>
 </body>
 </html>
